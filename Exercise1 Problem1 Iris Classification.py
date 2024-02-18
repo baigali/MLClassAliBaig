@@ -2,7 +2,7 @@ from sklearn.datasets import load_iris #our labels and targets comes from here
 from sklearn.model_selection import train_test_split # allows us to split training and testing data
 from sklearn.neighbors import KNeighborsClassifier
 
-
+# You'll notice a lot of comments with print statements. That is just me outputting what different objects contain. This helps with understanding/troubleshooting since I am novice programmer
 
 flower_data = load_iris()
 #print(dir(flower_data))
