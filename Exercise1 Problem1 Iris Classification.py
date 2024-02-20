@@ -1,8 +1,15 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[39]:
+
+
 from sklearn.datasets import load_iris #our labels and targets comes from here
 from sklearn.model_selection import train_test_split # allows us to split training and testing data
-from sklearn.neighbors import KNeighborsClassifier
+from sklearn.neighbors import KNeighborsClassifier # allows us to use KNN Algorithm
+from sklearn.preprocessing import StandardScaler, minmax_scale # allows us to scale our features
 
-# You'll notice a lot of comments with print statements. That is just me outputting what different objects contain. This helps with understanding/troubleshooting since I am novice programmer
+
 
 flower_data = load_iris()
 #print(dir(flower_data))
@@ -25,17 +32,22 @@ flower_data = load_iris()
 #print(flower_data['target_names'])
 
 
-X = flower_data.data
+X1 = flower_data.data
 # print(X)
+#X = minmax_scale(X1)
+scaler = StandardScaler() 
+X = scaler.fit_transform(X1)
+#print(X)
+#print(X1)
 y = flower_data.target
 # print(y)
 
-trainX, testX, trainy, testy = train_test_split(X,y, test_size=0.1, random_state=42)
+trainX, testX, trainy, testy = train_test_split(X,y, test_size=0.1, random_state=1)
 
 # print(testy)
 
 #define KNeighborsClassifier and set values for nearest neighbors and power for calculating distance.
-knn = KNeighborsClassifier(n_neighbors = 3, p = 2)
+knn = KNeighborsClassifier(n_neighbors =1, p = 1)
 
 #train the model
 knn.fit(trainX,trainy)
@@ -43,7 +55,19 @@ knn.fit(trainX,trainy)
 #make predictions based on training set
 knn.predict(testX)
 
+#lines below compare the actual values with our predictions
+print(knn.predict(testX))
+print(testy)
 
-#lines 48 and 49 compare the actual values with our predictions
-#print(knn.predict(testX))
-#print(testy)
+
+# In[ ]:
+
+
+
+
+
+# In[ ]:
+
+
+
+
